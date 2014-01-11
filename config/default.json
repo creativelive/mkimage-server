@@ -3,7 +3,7 @@
      * Which port the mkimage-server should listen to?
      * default is 8000 (to let the server run as non-root user)
      */
-    "listen": 80,
+    "listen": 8080,
 
     /**
      * SSL related options
@@ -50,7 +50,7 @@
      * Array of allowed hosts for image urls (glob matching)
      * default all blocked
      */
-    //"allowed_hosts": [""],
+    "allowed_hosts": ["creativelive.com"],
 
     /**
      * Enable verbose output

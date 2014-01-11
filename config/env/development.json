@@ -3,6 +3,6 @@
     "access_log": "", // log to stdout
     "access_log_format": "dev",
     "cache_dir": "/tmp/mkimage-dev",
-    "allowed_hosts": ["*"],
+    "allowed_hosts": ["*.creativelive.com"],
     "verbose": true
 }
