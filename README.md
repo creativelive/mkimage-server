@@ -41,6 +41,22 @@ On-demand image resize server based on 'express'
 ### Examples
 
     # resize an image with keeping ratio (width)
+    # /fit/{url}/{width}/{height?}
+    http://example.com/fit/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200
+
+    # resize an image with keeping ratio (width & height)
+    http://example.com/fit/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/100/200
+
+    # resize an image to given size without keeping the ratio
+    # /fill/{url}/{width}/{height}
+    http://example.com/fill/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200/200
+
+    # very basic crop for now, will add more options in future
+    # /crop/{url}/{xOffset}/{yOffset}/{width}/{height}
+    http://example.com/crop/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200/200/50/50
+
+### Old API 
+    # resize an image with keeping ratio (width)
     http://example.com/resize?url=http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png&w=200
 
     # resize an image with keeping ratio (height)
@@ -55,21 +71,6 @@ On-demand image resize server based on 'express'
 
     # return image with same size as original (just cache it)
     http://example.com/cache?url=http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png
-
-### Old API (@lieldulev)
-
-    # resize an image with keeping ratio (width)
-    http://example.com/r/?url=http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png&width=240
-
-    # resize an image with keeping ratio (height)
-    http://example.com/r/?url=http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png&height=240
-
-    # resize an image to given size without keeping the ratio
-    http://example.com/r/?url=http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png&width=240&height=240
-
-    # return image with same size as original
-    http://example.com/r/?url=http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png
-
 ***
 
 ### *More docs comming soon*
