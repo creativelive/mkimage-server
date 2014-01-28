@@ -19,7 +19,7 @@ console.log('NODE_ENV = %s, PID = %d, spawning workers...', process.env.NODE_ENV
 
 // configure cluster
 cluster.setupMaster({
-    exec: __dirname + "/../lib/worker.js"
+    exec: __dirname + "/lib/worker.js"
 });
 
 // fork workers as needed.
