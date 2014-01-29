@@ -1,42 +1,8 @@
 #!/usr/bin/env node
 process.chdir(__dirname);
-/**
- *
- * start mkimage workers
- *
- */
-
-var cluster = require('cluster'),
-    num_workers = process.env.MKIMAGE_MAX_WORKERS || require('os').cpus().length;
-    respawn_workers = true;
-
-// give a name to the process
-process.title = 'mkimage: master process ' + process.argv[1];
-
-// set running environment
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log('NODE_ENV = %s, PID = %d, spawning workers...', process.env.NODE_ENV, process.pid);
-
-// configure cluster
-cluster.setupMaster({
-    exec: __dirname + "/lib/worker.js"
-});
-
-// fork workers as needed.
-for (var i = 0; i < num_workers; i++)
-{
-    cluster.fork();
+if(process.env.NODE_ENV && process.env.NODE_ENV === "prod") {
+  process.env.NODE_ENV = "production";
+}else{
+  process.env.NODE_ENV = "development";
 }
-
-// log when new worker has started
-cluster.on('online', function(worker) {
-    console.log('worker %d running', worker.process.pid);
-});
-
-// if worker exited then start another one instead
-cluster.on('exit', function(worker, code, signal) {
-    if (respawn_workers) {
-      console.log("worker %d, respawning in 1 second ...", worker.process.pid);
-      setTimeout(cluster.fork, 1000);
-    }
-});
+var mkimage = require('./bin/mkimage');
