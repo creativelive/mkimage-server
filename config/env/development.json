@@ -1,5 +1,5 @@
 {
-    "listen": 8095,
+    "listen": 3020,
     "access_log": "", // log to stdout
     "access_log_format": "dev",
     "cache_dir": "/tmp/mkimage-dev",
