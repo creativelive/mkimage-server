@@ -26,6 +26,33 @@ On-demand image resize server based on 'express'
     # run it (in production)
     NODE_ENV=production bin/mkimage
 
+##CreativeLive specific setup
+in Ngninx setup
+
+add to cdn.creativelive.com
+  location ~* ^/(fill|fit|crop)/ {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_pass http://mkserver;
+    proxy_redirect off;
+  }
+
+add to creativelive.com
+upstream mkserver {
+  server 127.0.0.1:3020;
+}
+
+  location ~* ^/(fill|fit|crop)/ {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_pass http://mkserver;
+    proxy_redirect off;
+  }
+
+Haproxy will need to redirect those same routes fill/, fit/, and crop/ to whatever server is running the mkimage-server.
+
 ### Basic usage
 
  - `url` - the url of remote image to be converted (and cached)
