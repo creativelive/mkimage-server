@@ -28,7 +28,7 @@ On-demand image resize server based on 'express'
 
 ##CreativeLive specific setup
 in Ngninx setup
-
+```
 add to cdn.creativelive.com
   location ~* ^/(fill|fit|crop)/ {
     proxy_set_header Host $host;
@@ -50,7 +50,7 @@ upstream mkserver {
     proxy_pass http://mkserver;
     proxy_redirect off;
   }
-
+```
 Haproxy will need to redirect those same routes fill/, fit/, and crop/ to whatever server is running the mkimage-server.
 
 ### Basic usage
