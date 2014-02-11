@@ -26,7 +26,7 @@
     /**
      * Access logs file path, comment out to output to stdout
      */
-    "access_log": "/mnt/logs/mkimage-access.log",
+    "access_log": "/var/logs/nodejs/mkimage-access.log",
 
     /**
      * Access log format
