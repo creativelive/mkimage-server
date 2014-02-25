@@ -10,7 +10,7 @@ var cluster = require('cluster'),
     respawn_workers = true;
 
 // give a name to the process
-process.title = 'mkimage: master process ' + process.argv[1];
+process.title = 'mkimage-mstr:' + process.argv[1];
 
 // set running environment
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
