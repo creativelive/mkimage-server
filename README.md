@@ -30,7 +30,7 @@ On-demand image resize server based on 'express'
 in Ngninx setup
 ```
 add to cdn.creativelive.com
-  location ~* ^/(fill|fit|crop)/ {
+  location ~* ^/(fill|fit|crop|chop)/ {
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-NginX-Proxy true;
@@ -43,7 +43,7 @@ upstream mkserver {
   server 127.0.0.1:3020;
 }
 
-  location ~* ^/(fill|fit|crop)/ {
+  location ~* ^/(fill|fit|crop|chop)/ {
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-NginX-Proxy true;
@@ -82,7 +82,11 @@ Haproxy will need to redirect those same routes fill/, fit/, and crop/ to whatev
     # /crop/{url}/{xOffset}/{yOffset}/{width}/{height}
     http://example.com/crop/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200/200/50/50
 
-### Old API 
+    # a centered chop, shrink & crop cutting off edges - good for square thumbnails...
+    # /chop/{url}/{width}/{height}
+    http://example.com/chop/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/100/100
+
+### Old API
     # resize an image with keeping ratio (width)
     http://example.com/resize?url=http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png&w=200
 
