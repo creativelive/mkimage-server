@@ -1,60 +1,11 @@
 {
-    /**
-     * Which port the mkimage-server should listen to?
-     * default is 8000 (to let the server run as non-root user)
-     */
     "listen": 8080,
-
-    /**
-     * SSL related options
-     * default listen port is 8443
-     * full list of options:
-     *     http://nodejs.org/api/tls.html#tls_tls_createserver_options_secureconnectionlistener
-     */
     "ssl":
     {
-        //"cert": "/* ... path to certificate ... */",
-        //"key":  "/* ... path to private key ... */",
         "listen": false
     },
-
-    /**
-     * url namespace prefix (empty by default)
-     */
-    //"namespace": "mkimage",
-
-    /**
-     * Access logs file path, comment out to output to stdout
-     */
-    /*"access_log": "/var/log/nodejs/mkimage-access.log",*/
-
-    /**
-     * Access log format
-     * more info here: http://www.senchalabs.org/connect/logger.html
-     */
     "access_log_format": "default",
-
-    /**
-     * File cache directory, holds all downloaded/resized files
-     * must be accessible by the user that runs the mkimage-server
-     */
-    "cache_dir": "/mnt/cache/mkimage-server",
-
-    /**
-     * Maximum age of cached object in seconds
-     * default is 28 days (2419200 seconds)
-     */
-    //"cache_max_age": 2419200,
-
-    /**
-     * Array of allowed hosts for image urls (glob matching)
-     * default all blocked
-     */
+    "cache_dir": "/cache/mkimage-server",
     "allowed_hosts": ["creativelive.com"],
-
-    /**
-     * Enable verbose output
-     * default is false
-     */
     "verbose": false
 }

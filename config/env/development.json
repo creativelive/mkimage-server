@@ -1,6 +1,6 @@
 {
-    "listen": 3020,
-    "access_log": "", // log to stdout
+    "listen": 80,
+    "access_log": "",
     "access_log_format": "dev",
     "cache_dir": "/tmp/mkimage-dev",
     "allowed_hosts": ["*.creativelive.com"],
