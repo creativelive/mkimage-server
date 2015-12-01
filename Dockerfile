@@ -3,6 +3,7 @@ FROM docker.creativelive.com:5000/baseimage/cl-baseimage:latest
 
 # install dependencies
 RUN apt-get install -y imagemagick
+RUN mkdir -p /tmp/cache/mkimage-server
 
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install

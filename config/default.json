@@ -5,7 +5,7 @@
         "listen": false
     },
     "access_log_format": "default",
-    "cache_dir": "/cache/mkimage-server",
+    "cache_dir": "/tmp/cache/mkimage-server",
     "allowed_hosts": ["creativelive.com"],
     "verbose": false
 }
