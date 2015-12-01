@@ -1,6 +1,6 @@
 {
-    "listen": 3020,
+    "listen": 80,
     "allowed_hosts": ["*.creativelive.com"],
-    "cache_max_age": 86400, // cache for 2 days, till we confident with the service
-    "cache_dir": "/var/opt/imagecache"
+    "cache_max_age": 86400,
+    "cache_dir": "/tmp/cache/mkimage-server"
 }
