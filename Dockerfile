@@ -3,7 +3,7 @@ FROM docker.creativelive.com:5000/baseimage/cl-baseimage:latest
 
 # install dependencies
 RUN apt-get update
-RUN apt-get install -y imagemagick
+RUN apt-get install -y imagemagick build-essential
 
 RUN mkdir -p /tmp/cache/mkimage-server
 
