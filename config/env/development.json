@@ -1,8 +1,0 @@
-{
-    "listen": 80,
-    "access_log": "",
-    "access_log_format": "dev",
-    "cache_dir": "/cache/mkimage-server",
-    "allowed_hosts": ["*.creativelive.com"],
-    "verbose": true
-}
