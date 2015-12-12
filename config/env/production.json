@@ -1,6 +1,0 @@
-{
-    "listen": 80,
-    "allowed_hosts": ["*.creativelive.com"],
-    "cache_max_age": 86400,
-    "cache_dir": "/tmp/cache/mkimage-server"
-}
