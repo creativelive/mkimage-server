@@ -1,10 +1,13 @@
+/*eslint no-process-exit:0 */
 'use strict';
 var fs = require('fs');
 var log = require('sslog');
 var config = require('../lib/config');
 
+var configPath = process.env.CONFIG_PATH || './config/app.json';
+
 // load default config options
-config.load('./config/app.json', function(err) {
+config.load(configPath, function(err) {
   if (err) {
     log.error('Config: ' + err.message);
     process.exit(1);
@@ -24,7 +27,7 @@ config.load('./config/app.json', function(err) {
     try {
       if (config.ssl.ca) {
         if (!Array.isArray(config.ssl.ca)) {
-          throw new('config.ssl.ca: must be and Array of string(s)');
+          throw new Error('config.ssl.ca: must be and Array of string(s)');
         }
 
         config.ssl.ca = config.ssl.ca.map(function(ca) {
