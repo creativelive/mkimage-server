@@ -1,22 +1,54 @@
 {
-    "name": "mkimage-server",
-    "version": "0.3.10",
-    "description": "Image resizing server, using imagemagick cli tools",
-    "keywords": ["image", "resize", "server"],
-    "author": "Alex Simenduev <shamil@boxee.tv> (http://boxee.tv)",
-    "contributors": [ "Liel Dulev <liel@boxee.tv> (http://boxee.tv)" ],
-    "repository": "git://github.com/Boxee/mkimage-server.git",
-
-    "dependencies": {
-        "sslog": ">= 0.1.0",
-        "express": "3.1.1",
-        "fs-ext": ">= 0.3.1",
-        "mkdirp": ">= 0.3.5",
-        "request": ">= 2.16.6",
-        "minimatch": ">= 0.2.11",
-        "lru-cache": ">= 2.3.0"
-    },
-
-    "bin" : { "mkimage" : "./bin/mkimage" },
-    "engines": { "node": ">= 0.8.0" }
+  "name": "mkimage-server",
+  "version": "0.3.13",
+  "description": "Image resizing server, using imagemagick cli tools",
+  "keywords": [
+    "image",
+    "resize",
+    "server"
+  ],
+  "author": "Alex Simenduev <shamil@boxee.tv> (http://boxee.tv)",
+  "contributors": [
+    "Liel Dulev <liel@boxee.tv> (http://boxee.tv)"
+  ],
+  "repository": "git://github.com/Boxee/mkimage-server.git",
+  "dependencies": {
+    "sslog": ">= 0.1.0",
+    "express": "3.1.1",
+    "fs-ext": ">= 0.3.1",
+    "mkdirp": ">= 0.3.5",
+    "request": ">= 2.16.6",
+    "minimatch": ">= 0.2.11",
+    "lru-cache": ">= 2.3.0"
+  },
+  "devDependencies": {
+    "chai": "~1.10.0",
+    "eslint": "~0.24.0",
+    "event-stream": "~3.3.0",
+    "gulp": "~3.9.0",
+    "gulp-diff": "~0.3.1",
+    "gulp-eslint": "~0.1.8",
+    "gulp-help": "~0.1.11",
+    "gulp-istanbul": "~0.2.2",
+    "gulp-jsbeautifier": "0.0.2",
+    "gulp-mocha": "~1.1.2",
+    "gulp-util": "~3.0.4",
+    "lab": "~5.9.0",
+    "minimist": "~0.2.0",
+    "mocha": "~1.21.5",
+    "mongoose": "~3.8.25",
+    "prompt": "^0.2.14",
+    "@creativelive/gulp-docker-version-bump": "^1.0.4"
+  },
+  "bin": {
+    "mkimage": "./bin/mkimage"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "beautify": "node_modules/gulp/bin/gulp.js beautify --write",
+    "test": "alias gulp='node_modules/gulp/bin/gulp.js';gulp beautify",
+    "start": "node app"
+  }
 }

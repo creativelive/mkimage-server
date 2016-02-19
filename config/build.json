@@ -1,0 +1,12 @@
+{
+  "lint": [
+    "!coverage/**/*",
+    "!node_modules/**/*.js",
+    "**/*.js"
+  ],
+  "src": [
+    "config/**/*.js",
+    "lib/**/*.js",
+    "*.js"
+  ]
+}
