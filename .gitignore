@@ -4,3 +4,4 @@ node_modules
 # Mac OSX files
 .DS_Store
 
+.idea
