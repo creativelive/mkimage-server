@@ -1,0 +1,14 @@
+{
+  "mkimage": {
+    "listen": 3020,
+    "access_log": "",
+    "cache_dir": "/cache/mkimage-server",
+    "verbose": true,
+    "access_log_format": "default",
+    "allowed_hosts": ["*.creativelive.com"],
+    "cache_max_age": 86400,
+    "ssl": {
+      "listen": false
+    }
+  }
+}
