@@ -2,7 +2,7 @@
   "mkimage": {
     "listen": 3020,
     "access_log": "",
-    "cache_dir": "/cache/mkimage-server",
+    "cache_dir": "/vol0/imagecache",
     "verbose": true,
     "access_log_format": "default",
     "allowed_hosts": ["*.creativelive.com"],
