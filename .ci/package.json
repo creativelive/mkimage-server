@@ -1,0 +1,14 @@
+{
+  "name": "mkimage-server-ci",
+  "version": "1.0.0",
+  "description": "Used for getting @creativelive/gulp-docker-version-bump during build process",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Benson",
+  "license": "ISC",
+  "dependencies": {
+    "@creativelive/gulp-docker-version-bump": "^1.0.7"
+  }
+}

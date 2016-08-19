@@ -9,29 +9,25 @@ shopt -s extglob
 
 # BUILD VARIABLES
 REGISTRY="docker.creativelive.com:5000"
-APP="mkimage-server"
-GIT_BRANCH=${GIT_BRANCH}
-BRANCH=$(basename $GIT_BRANCH)
-REPONAME="${APP}-${BRANCH}"
+APP=$(cat package.json | jsawk 'return this.name')
+GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+BASE_BRANCH=$(basename $GIT_BRANCH)
+BRANCH=$(echo ${BASE_BRANCH} | awk '{ print tolower($0) }')
+NAME=$APP-$BRANCH
 
 # BUMP VERSION
 # install dependencies
+cd .ci
 npm install
-node_modules/gulp/bin/gulp.js version -j -n $APP-$BRANCH
+BUILD_TAG=$(node ./node_modules/\@creativelive/gulp-docker-version-bump/script.js -j -n ${NAME} -p $(pwd)/../package.json)
+cd ..
 
 # COMMIT CHANGE
-# cleanup pre-push hook
-rm -f .git/hooks/pre-push
-git commit -m 'bump version by jenkins' package.json
-git push origin $BRANCH
+git commit -m 'bump version by jenkins' package.json && \
+git push --no-verify origin $BASE_BRANCH
 
-APP_VERSION=$(cat package.json | /usr/bin/jsawk 'return this.version')
+# setup docker build
+docker build -t $BUILD_TAG .
+docker tag -f $BUILD_TAG $REGISTRY/$NAME:latest
 
-IMAGEID=$(docker build -t $REGISTRY/${REPONAME}:${APP_VERSION} . | tail -1 | sed 's/.*Successfully built \(.*\)$/\1/')
-docker tag -f ${IMAGEID} $REGISTRY/${REPONAME}:latest
-
-docker push $REGISTRY/$REPONAME
-
-# update package version on jenkins
-cat ~/build_versions/ci/versions.json | jq --arg VERSION "$APP_VERSION" --arg APP "$REPONAME" 'to_entries | map(if .key == $APP then . + { "value": $VERSION } else . end ) | from_entries' > ~/build_versions/ci/versions.json.tmp
-mv ~/build_versions/ci/versions.json.tmp ~/build_versions/ci/versions.json
+docker push $REGISTRY/$NAME
