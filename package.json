@@ -1,6 +1,6 @@
 {
   "name": "mkimage-server",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "description": "Image resizing server, using imagemagick cli tools",
   "keywords": [
     "image",
