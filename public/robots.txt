@@ -1,7 +1,4 @@
-# Allow Twitterbot but disallow all other bots
+# Allow all bots
 
-User-agent: Twitterbot
-Disallow:
-
-User-Agent: *
-Disallow: /
+User-agent: *
+Allow: /
