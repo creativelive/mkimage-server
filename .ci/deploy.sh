@@ -9,7 +9,7 @@ shopt -s extglob
 
 # BUILD VARIABLES
 REGISTRY="docker.creativelive.com:5000"
-APP=$(cat package.json | jsawk 'return this.name')
+APP=$(jq -r '.name' < package.json)
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 BASE_BRANCH=$(basename $GIT_BRANCH)
 BRANCH=$(echo ${BASE_BRANCH} | awk '{ print tolower($0) }')
@@ -28,6 +28,6 @@ git push --no-verify origin $BASE_BRANCH
 
 # setup docker build
 docker build -t $BUILD_TAG .
-docker tag -f $BUILD_TAG $REGISTRY/$NAME:latest
+docker tag $BUILD_TAG $REGISTRY/$NAME:latest
 
 docker push $REGISTRY/$NAME
