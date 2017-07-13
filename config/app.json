@@ -7,6 +7,7 @@
     "verbose": true,
     "access_log_format": "default",
     "allowed_hosts": ["*.creativelive.com"],
+    "allowed_origins": [ "*.cloudfront.net", "*.creativelive.com", "*.cl.int" ],
     "cache_max_age": 31536000,
     "ssl": {
       "listen": false
