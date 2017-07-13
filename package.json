@@ -1,6 +1,6 @@
 {
   "name": "mkimage-server",
-  "version": "0.3.23",
+  "version": "0.3.24",
   "description": "Image resizing server, using imagemagick cli tools",
   "keywords": [
     "image",
@@ -13,6 +13,7 @@
   ],
   "repository": "git://github.com/Boxee/mkimage-server.git",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "3.1.1",
     "lru-cache": ">= 2.3.0",
     "minimatch": ">= 0.2.11",
