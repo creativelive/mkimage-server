@@ -65,11 +65,17 @@ Haproxy will need to redirect those same routes fill/, fit/, and crop/ to whatev
 - **the url** `http://www.google.com/images/icons/product/apps-128.png`
 - **becomes** `http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png`
 
+Note: `lib/oldapi.js` is actually the new API, don't let it fool you.
+
 ### Examples
 
     # resize an image with keeping ratio (width)
     # /fit/{url}/{width}/{height?}
     http://example.com/fit/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200
+
+    ## resize an image with keeping ratio (width) and changing image quality (use q as a query param)
+    # /fit/{url}/{width}?q={quality}
+    http://example.com/fit/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200?q=60
 
     # resize an image with keeping ratio (width & height)
     http://example.com/fit/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/100/200
