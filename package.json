@@ -1,6 +1,6 @@
 {
-  "name": "mkimage-server",
-  "version": "0.4.0",
+  "name": "@creativelive/mkimage-server",
+  "version": "1.0.1-master.1",
   "description": "Image resizing server, using imagemagick cli tools",
   "keywords": [
     "image",
@@ -35,9 +35,7 @@
     "lab": "~5.9.0",
     "minimist": "~0.2.0",
     "mocha": "~1.21.5",
-    "mongoose": "~3.8.25",
-    "prompt": "^0.2.14",
-    "@creativelive/gulp-docker-version-bump": "^1.0.4"
+    "prompt": "^0.2.14"
   },
   "bin": {
     "mkimage": "./bin/mkimage"
@@ -46,8 +44,6 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "beautify": "node_modules/gulp/bin/gulp.js beautify --write",
-    "test": "alias gulp='node_modules/gulp/bin/gulp.js';gulp beautify",
     "start": "node app"
   }
 }

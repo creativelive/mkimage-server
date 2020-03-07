@@ -1,0 +1,6 @@
+FROM mhart/alpine-node:slim-8
+RUN apk add imagemagick
+WORKDIR /app
+COPY . .
+RUN ln -s out/node_modules node_modules
+CMD ["node", "app.js"]
