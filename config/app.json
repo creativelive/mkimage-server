@@ -3,12 +3,15 @@
     "listen": 3020,
     "access_log": "",
     "cache_dir": "/vol0/imagecache",
-    "work_dir": "/vol0/imagecache/__work__",
+    "work_dir": "/tmp",
     "verbose": true,
     "access_log_format": "default",
     "allowed_hosts": ["*.creativelive.com"],
     "allowed_origins": [ "*.cloudfront.net", "*.creativelive.com", "*.cl.int", "*.cl.dev" ],
     "cache_max_age": 31536000,
+    "qrcode": {
+      "appletv_endpoint": "https://local.creativelive.com/appletv"
+    },
     "ssl": {
       "listen": false
     }

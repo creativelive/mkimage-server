@@ -17,6 +17,7 @@
     "lru-cache": ">= 2.3.0",
     "minimatch": ">= 0.2.11",
     "mkdirp": "0.5.1",
+    "qrcode": "^1.4.4",
     "request": ">= 2.16.6",
     "sslog": ">= 0.1.0"
   },
