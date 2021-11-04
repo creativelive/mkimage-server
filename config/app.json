@@ -10,7 +10,8 @@
     "allowed_origins": [ "*.cloudfront.net", "*.creativelive.com", "*.cl.int", "*.cl.dev" ],
     "cache_max_age": 31536000,
     "qrcode": {
-      "appletv_endpoint": "https://local.creativelive.com/appletv"
+      "appletv_endpoint": "https://local.creativelive.com/appletv",
+      "roku_endpoint": "https://local.creativelive.com/roku"
     },
     "ssl": {
       "listen": false
