@@ -3,7 +3,7 @@
     "listen": 3020,
     "access_log": "",
     "cache_dir": "/tmp/imagecache",
-    "work_dir": "/tmp",
+    "work_dir": "/tmp/mkimage",
     "verbose": true,
     "access_log_format": "default",
     "allowed_hosts": ["*.creativelive.com"],

@@ -9,7 +9,9 @@ artifact=$(docker_artifact)
 
 if [[ -f Dockerfile.src ]]; then
   rm -f Dockerfile
-  export BASEIMAGE="$(docker_registry)/cl-baseimage-alpine:$(docker_base_tag)"
+  export BASEIMAGE="$(docker_registry)/cl-baseimage-alpine-lts:$(docker_base_tag)"
+  export BASEIMAGE_SLIM="mhart/alpine-node:slim-14"
+  export NPM_REGISTRY="$(npm_registry)"
   cat Dockerfile.src | envsubst > Dockerfile
 fi
 
@@ -22,8 +24,7 @@ if [[ -f Dockerfile ]]; then
   build="${name}:${uuid}"
 
   if [[ -f package.json ]]; then
-    base="$(docker_registry)/cl-baseimage-alpine:$(docker_base_tag)"
-    echo "** running npm install inside base container ${base}..."
+    echo "** preparing for npm install inside base container ${BASEIMAGE}..."
     mkdir -p out
 
     if [[ ! -z "${NPM_CONFIG_USERCONFIG}" ]]; then
@@ -37,18 +38,9 @@ if [[ -f Dockerfile ]]; then
 
     cp -f package.json package-lock.json out
     cp -f "${NPM_CONFIG_USERCONFIG}" out/.npmrc
-
-    docker run -t -w /out -v `pwd`/out:/out "${base}" npm ci --unsafe-perms --production --registry=$(npm_registry)
-
-    rm -f out/.npmrc
-
-    if [[ ! -d out/node_modules ]]; then
-      echo "** failed to build inside container!"
-      exit 1
-    fi
   fi
 
-  docker build -t ${build} . #\
+  docker_build -t ${build} . #\
 #    && docker save ${build} > ${name}.tar \
 #    && gzip ${name}.tar 
 

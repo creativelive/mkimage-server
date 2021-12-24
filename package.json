@@ -19,13 +19,14 @@
     "lru-cache": "6.0.x",
     "minimatch": "3.0.x",
     "qrcode": "1.5.x",
-    "request": ">= 2.16.6"
+    "request": ">= 2.16.6",
+    "uuid": "^8.3.2"
   },
   "bin": {
     "mkimage": "./bin/mkimage"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 14.0.0"
   },
   "scripts": {
     "start": "node app"

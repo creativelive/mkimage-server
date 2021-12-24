@@ -5,6 +5,9 @@
  *
  */
 
+const {log} = require('../lib/logger')();
+
+
 var cluster = require('cluster'),
     num_workers = process.env.MKIMAGE_MAX_WORKERS || require('os').cpus().length;
     respawn_workers = true;
@@ -14,7 +17,8 @@ process.title = 'mkimage-mstr:' + process.argv[1];
 
 // set running environment
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log('NODE_ENV = %s, PID = %d, spawning workers...', process.env.NODE_ENV, process.pid);
+log.info({env: process.env.NODE_ENV}, 'spawning workers...')
+//console.log('NODE_ENV = %s, PID = %d, spawning workers...', process.env.NODE_ENV, process.pid);
 
 // configure cluster
 cluster.setupMaster({
@@ -29,13 +33,15 @@ for (var i = 0; i < num_workers; i++)
 
 // log when new worker has started
 cluster.on('online', function(worker) {
-    console.log('worker %d running', worker.process.pid);
+    log.info(`worker ${worker.process.pid} running`)
+//    console.log('worker %d running', worker.process.pid);
 });
 
 // if worker exited then start another one instead
 cluster.on('exit', function(worker, code, signal) {
     if (respawn_workers) {
-      console.log("worker %d, respawning in 1 second ...", worker.process.pid);
-      setTimeout(cluster.fork, 1000);
+        log.warn(`worker ${worker.process.pid} exited, respawning in 1 second...`)
+//      console.log("worker %d, respawning in 1 second ...", worker.process.pid);
+        setTimeout(cluster.fork, 1000);
     }
 });
