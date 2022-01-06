@@ -1,6 +1,19 @@
-FROM mhart/alpine-node:slim-8
-RUN apk add imagemagick
+FROM ${BASEIMAGE} AS build
+WORKDIR /build
+COPY out/ .
+RUN npm ci --unsafe-perms --production --registry=${NPM_REGISTRY}
+# --loglevel silly
+# pull base image
+FROM ${BASEIMAGE_SLIM}
 WORKDIR /app
 COPY . .
-RUN ln -s out/node_modules node_modules
-CMD ["node", "app.js"]
+COPY --from=build /build/node_modules ./node_modules
+RUN apk add --update file imagemagick
+
+# define default command
+CMD ["node", "--inspect=0.0.0.0:9229", "app.js"]
+
+# expose ports
+EXPOSE 3020
+EXPOSE 9229
+

@@ -1,7 +1,7 @@
 {
   "name": "@creativelive/mkimage-server",
-  "version": "1.0.6",
-  "description": "Image resizing server, using imagemagick cli tools",
+  "version": "1.1.1-master.2",
+  "description": "Image resizing server, using imagemagick cli tools (CreativeLive updated version)",
   "keywords": [
     "image",
     "resize",
@@ -9,40 +9,24 @@
   ],
   "author": "Alex Simenduev <shamil@boxee.tv> (http://boxee.tv)",
   "contributors": [
-    "Liel Dulev <liel@boxee.tv> (http://boxee.tv)"
+    "Liel Dulev <liel@boxee.tv> (http://boxee.tv)",
+    "CreativeLive Team <eng@creativelive.com>"
   ],
   "repository": "git://github.com/Boxee/mkimage-server.git",
   "dependencies": {
-    "express": "3.1.1",
-    "lru-cache": ">= 2.3.0",
-    "minimatch": ">= 0.2.11",
-    "mkdirp": "0.5.1",
-    "qrcode": "^1.4.4",
+    "bunyan": "^1.8.15",
+    "express": "4.17.x",
+    "lru-cache": "6.0.x",
+    "minimatch": "3.0.x",
+    "qrcode": "1.5.x",
     "request": ">= 2.16.6",
-    "sslog": ">= 0.1.0"
-  },
-  "devDependencies": {
-    "chai": "~1.10.0",
-    "eslint": "~0.24.0",
-    "event-stream": "~3.3.0",
-    "gulp": "~3.9.0",
-    "gulp-diff": "~0.3.1",
-    "gulp-eslint": "~0.1.8",
-    "gulp-help": "~0.1.11",
-    "gulp-istanbul": "~0.2.2",
-    "gulp-jsbeautifier": "0.0.2",
-    "gulp-mocha": "~1.1.2",
-    "gulp-util": "~3.0.4",
-    "lab": "~5.9.0",
-    "minimist": "~0.2.0",
-    "mocha": "~1.21.5",
-    "prompt": "^0.2.14"
+    "uuid": "^8.3.2"
   },
   "bin": {
     "mkimage": "./bin/mkimage"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 14.0.0"
   },
   "scripts": {
     "start": "node app"

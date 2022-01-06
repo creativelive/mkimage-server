@@ -1,8 +1,8 @@
 /*eslint no-process-exit:0 */
 'use strict';
-var fs = require('fs');
-var log = require('sslog');
-var config = require('../lib/config');
+const fs = require('fs');
+const {log} = require('../lib/logger')();
+let config = require('../lib/config');
 
 var configPath = process.env.CONFIG_PATH || './config/app.json';
 
@@ -18,6 +18,10 @@ config.load(configPath, function(err) {
   // set verbose level
   if (config.verbose) {
     log.level = 5;
+  }
+
+  if (config.work_dir) {
+    fs.mkdirSync(config.work_dir, {recursive: true});
   }
 
   // prepare for SSL if enabled

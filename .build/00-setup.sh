@@ -220,6 +220,14 @@ update_scope() {
   fi
 }
 
+docker_build() {
+    if [[ "$(uname -m)" == "arm64" ]]; then
+	echo "***** cross-compiling for amd64 *****"
+	docker buildx build --platform linux/amd64 "$@"
+    else
+	docker build "$@"
+    fi
+}
 
 docker_artifact() {
   echo "$(package_name):$(package_version)"
