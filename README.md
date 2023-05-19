@@ -85,12 +85,17 @@ Note: `lib/oldapi.js` is actually the new API, don't let it fool you.
     http://example.com/fill/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200/200
 
     # very basic crop for now, will add more options in future
-    # /crop/{url}/{xOffset}/{yOffset}/{width}/{height}
+    # /crop/{url}/{width}/{height}/{xOffset}/{yOffset}
     http://example.com/crop/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/200/200/50/50
 
     # a centered chop, shrink & crop cutting off edges - good for square thumbnails...
     # /chop/{url}/{width}/{height}
     http://example.com/chop/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/100/100
+
+    # return resized/cropped/etc. image in webp format
+    # /{method}/{url}/webp/{width}/{height?}/{xOffset?}/{yOffset?}
+    http://example.com/fit/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/webp/200
+    http://example.com/crop/http%3A%2F%2Fwww.google.com%2Fimages%2Ficons%2Fproduct%2Fapps-128.png/webp/200/200/50/50
 
 ### Old API
     # resize an image with keeping ratio (width)
