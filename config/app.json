@@ -5,6 +5,8 @@
     "cache_dir": "/tmp/imagecache",
     "work_dir": "/tmp/mkimage",
     "verbose": true,
+    "prefix": "",
+    "disable_cache": false,
     "access_log_format": "default",
     "allowed_hosts": ["*.creativelive.com"],
     "allowed_origins": [ "*.cloudfront.net", "*.creativelive.com", "*.cl.int", "*.cl.dev" ],
