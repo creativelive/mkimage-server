@@ -1,6 +1,6 @@
 {
   "name": "@creativelive/mkimage-server",
-  "version": "1.2.1-master.1",
+  "version": "1.2.1-master.2",
   "description": "Image resizing server, using imagemagick cli tools (CreativeLive updated version)",
   "keywords": [
     "image",
@@ -14,13 +14,12 @@
   ],
   "repository": "git://github.com/Boxee/mkimage-server.git",
   "dependencies": {
-    "bunyan": "^1.8.15",
-    "express": "4.17.x",
+    "bunyan": "1.8.x",
+    "express": "4.19.x",
     "lru-cache": "6.0.x",
     "minimatch": "3.0.x",
     "qrcode": "1.5.x",
-    "request": ">= 2.16.6",
-    "uuid": "^8.3.2"
+    "request": "2.88.x"
   },
   "bin": {
     "mkimage": "./bin/mkimage"
