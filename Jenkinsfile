@@ -1,64 +1,62 @@
-node("build") {
-  try {
+node("build-docker") {
+
+
+ try {
+    stage('clone') {
+        /* Let's make sure we have the repository cloned to our workspace */
+        checkout scm
+        currentBuild.displayName = ""
+    }
     withCredentials([
         usernamePassword(credentialsId: 'builder', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD'),
         file(credentialsId: 'npmrc', variable: 'NPM_CONFIG_USERCONFIG')
-    ])
-    {
-      stage('Clone Repository') {
-        checkout scm
-      }
-      stage('Check Version') {
-        sh '.build/01-version.sh'
-        def version = readFile "${env.WORKSPACE}/.version.tmp"
-        currentBuild.displayName = version
-      }
-      if (fileExists('.build/02-build.sh')) {
-        stage('Build') {
-          sh '.build/02-build.sh'
-        }
-      }
-      if (fileExists('.build/03-test.sh')) {
-        stage('Test') {
-          sh '.build/03-test.sh'
-        }
-      }
-      if (fileExists('.build/04-commit.sh')) {
-        stage('Commit' ) {
-          sh '.build/04-commit.sh'
-        }
-      }
-      if (fileExists('.build/05-npm-publish.sh')) {
-        stage('Publish to NPM') {
-          sh '.build/05-npm-publish.sh'
-        }
-      }
-      if (fileExists('.build/06-docker-build.sh')) {
-        stage('Build for Docker') {
-          sh '.build/06-docker-build.sh'
-        }
-      }
-      if (fileExists('.build/07-docker-publish.sh')) {
-        stage('Publish to Docker') {
-          sh '.build/07-docker-publish.sh'
-        }
-      }
+    ]) {
+      runBuildScripts()
     }
-  }
-  catch(e) {
-    echo 'failed'
-    throw e
-  }
-  finally {
-    def currentResult = currentBuild.result ?: 'SUCCESS'
-    if (currentResult == 'UNSTABLE') {
-      echo 'Build is unstable!'
-    }
-    def previousResult = currentBuild.previousBuild?.result
-    if (previousResult != null && previousResult != currentResult) {
-      echo 'State of the Pipeline has changed!'
-    }
-    echo 'Deleting directory...'
-    deleteDir()
+
  }
+ catch (e) {
+   echo 'failed'
+   echo 'Exception: ' + e.toString()
+   throw e
+ }
+ finally {
+         def currentResult = currentBuild.result ?: 'SUCCESS'
+         if (currentResult == 'UNSTABLE') {
+             echo 'Build is unstable!'
+         }
+
+         def previousResult = currentBuild.previousBuild?.result
+         if (previousResult != null && previousResult != currentResult) {
+             echo 'State of the Pipeline has changed!'
+         }
+         echo 'Deleting directory...'
+         deleteDir()
+ }
+}
+
+def runBuildScripts() {
+  def buildSteps = findFiles(glob: ".build/*")
+
+  buildSteps.each { f ->
+   def filename = f.getName()
+   def stageName = getStageName(filename);
+
+   if (stageName) {
+     stage("${stageName}") {
+       sh ".build/${filename}"
+
+       if (fileExists(".${stageName}.tmp")) {
+         def info = readFile ".${stageName}.tmp"
+         currentBuild.displayName += "${info} "
+       }
+      }
+    }
+  }
+}
+
+@NonCPS
+def getStageName(filename) {
+   def match = (filename =~ /.*(?!00)[0-9]{2}-(.+)\.sh/)
+   return match.matches()? match[0][1] : null
 }
