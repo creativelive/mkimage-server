@@ -1,19 +1,15 @@
-FROM ${BASEIMAGE} AS build
+FROM ${DOCKER_REGISTRY}/cl-alpine-20 AS builder
 WORKDIR /build
-COPY out/ .
-RUN npm ci --unsafe-perms --production --registry=${NPM_REGISTRY}
-# --loglevel silly
-# pull base image
-FROM ${BASEIMAGE_SLIM}
+COPY build/ .
+RUN npm ci --unsafe-perms --production --registry=${NPM_REGISTRY} && npm run jenkins-build --if-present
+FROM ${DOCKER_REGISTRY}/cl-alpine-slim-20
 WORKDIR /app
 COPY . .
-COPY --from=build /build/node_modules ./node_modules
+COPY --from=builder /build/node_modules ./node_modules
 RUN apk add --update file imagemagick
 
-# define default command
 CMD ["node", "--inspect=0.0.0.0:9229", "app.js"]
 
 # expose ports
 EXPOSE 3020
 EXPOSE 9229
-
