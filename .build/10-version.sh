@@ -21,7 +21,7 @@ fi
 echo "*** Checking package version..."
 
 if [[ -f package.json ]]; then
-
+  prepare_build_phase
   if [[ "${bump}" == "false" && -n "$(prerelease_tag)" && "$(package_prerelease_tag)" != "$(prerelease_tag)" ]]; then
     echo "package version ${version} needs to be updated with prerelease tag of $(prerelease_tag)"
     bump="true"
