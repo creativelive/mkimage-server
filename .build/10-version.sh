@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-if [[ -z "${PACKAGE_NAME}" ]]; then source ".build/00-setup.sh"; fi
+build_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+
+if [[ -z "${PACKAGE_NAME}" ]]; then source "${build_dir}/00-setup.sh"; fi
 
 
-rm -f "${COMMIT_FILENAME}"
-
-name="$(package_name)"
 version="$(package_version)"
 bump="false"
 
@@ -16,19 +15,19 @@ current_scope="$(package_scope)"
 update_scope
 
 if [[ "$(package_scope)" != "${current_scope}" ]]; then
-  echo "updated package scope to @$(package_scope)/$(package_name)"
+  echo "*** updated package scope to @$(package_scope)/$(package_name)"
 fi
 
 echo "*** Checking package version..."
 
 if [[ -f package.json ]]; then
-
-  if [[ "${bump}" == "false" && ! -z "$(prerelease_tag)" && "$(package_prerelease_tag)" != "$(prerelease_tag)" ]]; then
+  prepare_build_phase
+  if [[ "${bump}" == "false" && -n "$(prerelease_tag)" && "$(package_prerelease_tag)" != "$(prerelease_tag)" ]]; then
     echo "package version ${version} needs to be updated with prerelease tag of $(prerelease_tag)"
     bump="true"
   fi
 
-  if [[ "${bump}" == "false" && -z $(prerelease_tag) && ! -z "$(package_prerelease_tag)" ]]; then
+  if [[ "${bump}" == "false" && -z $(prerelease_tag) && -n "$(package_prerelease_tag)" ]]; then
     echo "package version ${version} needs to be updated to a release version"
     bump="true"
   fi
@@ -43,11 +42,9 @@ if [[ -f package.json ]]; then
   fi
 
   until [[ "${bump}" == "false" ]]; do
+    bump_version
     updated="$(package_version)"
-
-    bumped=$(bump_version)
-    updated="$(package_version)"
-    echo "checking ${updated}..."
+    echo "*** checking ${updated}..."
 
     bump=$(is_version_published_npm "${updated}")
   done
@@ -58,9 +55,9 @@ else
   fi
 fi
 
-echo $(package_version) > .version.tmp
+echo "$(package_version)" > .version.tmp
 
-if [[ ! -z "${updated}" ]] && [[ "${updated}" != "${version}" ]]; then
-  echo "..updated from ${version} to ${updated}"
+if [[ -n "${updated}" ]] && [[ "${updated}" != "${version}" ]]; then
+  echo "*** ..updated from ${version} to ${updated}"
 fi
 
