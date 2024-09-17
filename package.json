@@ -1,6 +1,6 @@
 {
   "name": "@creativelive/mkimage-server",
-  "version": "1.2.1-master.3",
+  "version": "1.2.1-master.4",
   "description": "Image resizing server, using imagemagick cli tools (CreativeLive updated version)",
   "keywords": [
     "image",
